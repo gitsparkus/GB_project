@@ -24,5 +24,3 @@ for i in range(1, 101):
     elif last_digit in range(2, 5):
         percent_word = 'процента'
     print(i, percent_word)
-
-
