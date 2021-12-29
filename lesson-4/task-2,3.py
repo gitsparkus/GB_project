@@ -1,27 +1,19 @@
-import requests
-from datetime import  datetime
-from decimal import Decimal
+"""
+2. Написать функцию currency_rates(), принимающую в качестве аргумента код валюты (например, USD, EUR, GBP, ...) и
+возвращающую курс этой валюты по отношению к рублю. Использовать библиотеку requests. В качестве API можно использовать
+http://www.cbr.ru/scripts/XML_daily.asp. Рекомендация: выполнить предварительно запрос к API в обычном браузере,
+посмотреть содержимое ответа. Можно ли, используя только методы класса str, решить поставленную задачу? Функция должна
+возвращать результат числового типа, например float. Подумайте: есть ли смысл для работы с денежными величинами
+использовать вместо float тип Decimal? Сильно ли усложняется код функции при этом? Если в качестве аргумента передали
+код валюты, которого нет в ответе, вернуть None. Можно ли сделать работу функции не зависящей от того, в каком регистре
+был передан аргумент? В качестве примера выведите курсы доллара и евро.
 
+3. * (вместо 2) Доработать функцию currency_rates(): теперь она должна возвращать кроме курса дату, которая передаётся
+в ответе сервера. Дата должна быть в виде объекта date. Подумайте, как извлечь дату из ответа, какой тип данных лучше
+использовать в ответе функции?
+"""
 
-def currency_rates(valute_code: str) -> dict:
-    result_dict = {'date': None, 'rate': None}
-
-    response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp')
-    response_content = response.text
-
-    if response_content.find('Date="') > 0:
-        date_str = response_content.split('Date="')[1]
-        date_str = date_str.split('"')[0]
-        result_dict['date'] = datetime.strptime(date_str, '%d.%m.%Y')
-
-    if response_content.find(valute_code.upper()) > 0:
-        content_str = response_content.split(valute_code.upper())[1]
-        content_str = content_str.split('<Value>')[1]
-        content_str = content_str.split('</Value>')[0]
-        result_dict['rate'] = Decimal(content_str.replace(',', '.'))
-
-    return result_dict
-
+from utils import currency_rates  # Сама функция в файле utils.py, чтобы можно было ее использовать в заданиях 4, 5
 
 if __name__ == '__main__':
     print(currency_rates('USD'))

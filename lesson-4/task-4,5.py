@@ -1,31 +1,18 @@
-import requests
+"""
+4. Написать свой модуль utils и перенести в него функцию currency_rates() из предыдущего задания. Создать скрипт, в
+котором импортировать этот модуль и выполнить несколько вызовов функции currency_rates(). Убедиться, что ничего лишнего
+не происходит.
+5. * (вместо 4) Доработать скрипт из предыдущего задания: теперь он должен работать и из консоли. Например:
+> python task_4_5.py USD
+75.18, 2020-09-05
+"""
+
+from utils import currency_rates
 from datetime import datetime
-from decimal import Decimal
 import sys
 
-
-def currency_rates(valute_code: str) -> dict:
-    result_dict = {'date': None, 'rate': None}
-
-    response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp')
-    response_content = response.text
-
-    if response_content.find('Date="') > 0:
-        date_str = response_content.split('Date="')[1]
-        date_str = date_str.split('"')[0]
-        result_dict['date'] = datetime.strptime(date_str, '%d.%m.%Y')
-
-    if response_content.find(valute_code.upper()) > 0:
-        content_str = response_content.split(valute_code.upper())[1]
-        content_str = content_str.split('<Value>')[1]
-        content_str = content_str.split('</Value>')[0]
-        result_dict['rate'] = Decimal(content_str.replace(',', '.'))
-
-    return result_dict
-
-
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        rate_dict = currency_rates(sys.argv[1])
-        if rate_dict['rate']:
+    if len(sys.argv) > 1:  # Если передан хоть один параметр при запуске
+        rate_dict = currency_rates(sys.argv[1])  # Выполняем функцию, передав ей первый параметр
+        if rate_dict['rate']:  # Если вернулся словарь, в котором есть курс
             print(f'{round(rate_dict["rate"], 2)}, {datetime.strftime(rate_dict["date"], "%Y-%m-%d")}')
