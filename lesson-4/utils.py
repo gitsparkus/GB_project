@@ -10,7 +10,7 @@ def currency_rates(val_code: str) -> dict:
     response = requests.get('http://www.cbr.ru/scripts/XML_daily.asp')
     response_content = response.text
 
-    if response_content.find('Date="') > 0:  # Если в ответе есть Date
+    if response_content.find('Date="') > 0:  # Если в ответе есть атрибут Date
         date_str = response_content.split('Date="')[1].split('"')[0]
         # Записать в результат дату, сконвертировав ее в тип DateTime
         result_dict['date'] = datetime.strptime(date_str, '%d.%m.%Y')
