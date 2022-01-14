@@ -47,8 +47,8 @@ for check_file in (users_file, hobby_file):
 else:
     # Открываем файлы
     with open(users_file, 'r', encoding='UTF-8') as users_f, \
-         open(hobby_file, 'r', encoding='UTF-8') as hobby_f, \
-         open(out_file, 'w', encoding='UTF-8') as out_f:
+            open(hobby_file, 'r', encoding='UTF-8') as hobby_f, \
+            open(out_file, 'w', encoding='UTF-8') as out_f:
 
         # Проходим по файлу пользователей
         for user in users_f:

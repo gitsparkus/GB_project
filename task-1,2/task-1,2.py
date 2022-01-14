@@ -28,20 +28,19 @@ def parse_file_generator(parse_file):
 
 # Проверка работы генератора
 with open('nginx_logs.txt', 'r', encoding='UTF-8') as f:
-    for item in parse_file_generator(f):
-        pass
-        # input(item)
+    my_list = list(parse_file_generator(f))
+    print(my_list)
 
 # Парсинг файла и формирование словаря, где ключи - ip, а значения - количество их повторений
-spammers_dict = dict()
+counting_dict = dict()
 with open('nginx_logs.txt', 'r', encoding='UTF-8') as f:
     for item in parse_file_generator(f):
-        if item[0] in spammers_dict:
-            spammers_dict[item[0]] += 1
+        if item[0] in counting_dict:
+            counting_dict[item[0]] += 1
         else:
-            spammers_dict[item[0]] = 1
+            counting_dict[item[0]] = 1
 
 # Фильтр возвращает список кортежей вида (спамер, количество запросов). На случай, если бедет несколько ip с одинаковым
 # количеством запросов
-spammers = list(filter(lambda x: x[1] == max(spammers_dict.values()), spammers_dict.items()))
-print(spammers)
+spammers = list(filter(lambda x: x[1] == max(counting_dict.values()), counting_dict.items()))
+print('Спамеры: ', spammers, end='')
