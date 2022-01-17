@@ -1,4 +1,7 @@
+# Отступы - 3 пробела
+# Имена папок заканчиваются двоеточием. Это позволяет созавать пустые папки, папки с точками в имени и файлы без расширений
 my_project:
+      empty.folder:
       settings:
          __init__.py
          dev.py
@@ -16,7 +19,6 @@ my_project:
          models.py
          views.py
          templates:
-            test:
             authapp:
                base.html
                index.html
