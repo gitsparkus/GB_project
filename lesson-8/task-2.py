@@ -26,4 +26,4 @@ with open('nginx_logs.txt', 'r', encoding='UTF-8') as f:
         for line in f:
             result_parse = parse_raw(line)
             print(result_parse)
-            # print(result_parse, file=result_f)
+            print(result_parse, file=result_f)
