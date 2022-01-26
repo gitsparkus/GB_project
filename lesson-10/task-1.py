@@ -34,7 +34,7 @@ class Matrix:
             raise ValueError("Матрица должны быть списком списков")
 
     def __str__(self):
-        return '\n'.join([str(x) for x in self.__matrix])
+        return '\n'.join(['  '.join(map(str, x)) for x in self.__matrix])
 
     def __add__(self, other):
         if len(self.__matrix) != len(other.__matrix):
@@ -43,7 +43,7 @@ class Matrix:
             [list(map(lambda x, y: x + y, self.__matrix[i], other.__matrix[i])) for i in range(len(self.__matrix))])
 
 
-list1 = [[1, 2], [3, 4]]
+list1 = [[1, 2], [3, -4]]
 list2 = [[5, 6], [7, 8]]
 
 matrix1 = Matrix(list1)
