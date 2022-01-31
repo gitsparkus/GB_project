@@ -29,13 +29,17 @@ def print_menu():
 
 
 def print_devisions(goods=False):
-    print('Список складов:')
     for i, item in enumerate(CompanyDivision.get_divisions()):
         print(f'{i}. {item.name}')
         if goods:
             print(item)
 
-
+def select_division():
+    print_devisions()
+    devision_id = None
+    while devision_id not in range(len(CompanyDivision.get_divisions())):
+        devision_id = int(input('Введите номер склада:'))
+    return CompanyDivision.get_divisions()[devision_id]
 
 warehouse = CompanyDivision('Основной склад')
 main_office = CompanyDivision('Главный офис', False)
@@ -52,11 +56,7 @@ while True:
             print_devisions(True)
             input('Для продолжения нажмите Enter...')
         if current_menu == '2':
-            print_devisions()
-            devision_id = None
-            while devision_id not in range(len(CompanyDivision.get_divisions())):
-                devision_id = int(input('Введите номер склада:'))
-            devision = CompanyDivision.get_divisions()[devision_id]
+            devision = select_division()
             type_eq = '0'
             while type_eq not in ('1', '2', '3'):
                 type_eq = input('Тип оборудования(1-принтер,2-сканер,3-ксерокс):')
@@ -79,6 +79,12 @@ while True:
                     print(devision)
                     input('Для продолжения нажмите Enter...')
         if current_menu == '3':
-            pass
+            print('Откуда:')
+            devision_from = select_division()
+            print(devision_from)
+
+            print('Куда:')
+            devision_to = select_division()
+
         if current_menu == '4':
             break
