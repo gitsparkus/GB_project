@@ -28,7 +28,7 @@ class CompanyDivision:
 
     def _is_valid_is_warehouse(self, is_warehouse):
         if not isinstance(is_warehouse, bool):
-            raise ValueError(f'{self._name}: Тип подразделения может быть только True или False')
+            raise ValueError(f'{self._name}: Признак склада может быть только True или False')
         return is_warehouse
 
     @property
@@ -58,7 +58,7 @@ class OfficeEquipment:
 
     @property
     def condition(self):
-        return 'New' if self._is_new else 'Used'
+        return 'Новый' if self._is_new else 'Б/У'
 
 
 class Printer(OfficeEquipment):
