@@ -39,5 +39,5 @@ class Complex:
 complex1 = Complex('-5+6i')
 complex2 = Complex('1-3i')
 print(complex1, complex2)
-print(f'({complex1})+({complex2}) =',(complex1 + complex2))
-print(f'({complex1})*({complex2}) =',(complex1 * complex2))
+print(f'({complex1})+({complex2}) = {(complex1 + complex2)}')
+print(f'({complex1})*({complex2}) = {(complex1 * complex2)}')

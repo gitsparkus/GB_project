@@ -9,7 +9,7 @@ class MyDevByZero(Exception):
     pass
 
 
-i1, i2 = map(input, ('Введите числитель:', 'Введите знаминатель:'))
+i1, i2 = map(input, ('Введите числитель:', 'Введите знаменатель:'))
 
 try:
     if int(i2) == 0:

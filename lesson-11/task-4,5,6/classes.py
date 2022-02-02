@@ -1,5 +1,6 @@
 from prettytable import PrettyTable
 
+
 class CompanyDivision:
     _divisions = []
 
@@ -13,27 +14,29 @@ class CompanyDivision:
         self.__is_warehouse = is_warehouse
         CompanyDivision._divisions.append(self)
 
-    def receipt(self, equipment, quantity):
-        self._equipment.append({'item': equipment, 'quantity': quantity})
+    def receipt(self, equipment):
+        self._equipment.append(equipment)
 
-    def move(self, equipment_id: int, division, quantity):
-        if quantity == self._equipment[equipment_id]['quantity']:
-            division._equipment.append(self._equipment.pop(equipment_id))
-        elif quantity in range(1, self._equipment[equipment_id]['quantity']):
-            self._equipment[equipment_id]['quantity'] -= quantity
-            division._equipment.append({'item': self._equipment[equipment_id]['item'], 'quantity': quantity})
-        else:
-            raise ValueError
+    def move(self, equipment_id: int, division):
+        division._equipment.append(self._equipment.pop(equipment_id))
 
     def __str__(self):
-        table = PrettyTable(['id', 'Наименование', 'Количество', 'Состояние'])
+        table = PrettyTable(['id', 'Наименование', 'Состояние'])
         for i, item in enumerate(self._equipment):
-            table.add_row([i, str(item['item']), item['quantity'], item['item'].condition])
-        return f'{str(table)}'
+            table.add_row([i, str(item), item.condition])
+        return f'{str(table.get_string(title=self._name))}'
 
     @property
     def name(self):
         return self._name
+
+    @property
+    def type(self):
+        return 'Склад' if self.__is_warehouse else 'Подразделение'
+
+    @property
+    def equipment(self):
+        return self._equipment
 
 
 class OfficeEquipment:
