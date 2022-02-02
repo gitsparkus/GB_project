@@ -26,9 +26,10 @@ class CompanyDivision:
             table.add_row([i, str(item), item.condition])
         return f'{str(table.get_string(title=self._name))}'
 
-    def _is_valid_is_warehouse(self, is_warehouse):
+    @staticmethod
+    def _is_valid_is_warehouse(is_warehouse):
         if not isinstance(is_warehouse, bool):
-            raise ValueError(f'{self._name}: Признак склада может быть только True или False')
+            raise ValueError(f'Признак склада может быть только True или False')
         return is_warehouse
 
     @property
