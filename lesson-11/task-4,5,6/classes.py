@@ -11,20 +11,25 @@ class CompanyDivision:
     def __init__(self, name, is_warehouse=True):
         self._name = name
         self._equipment = []
-        self.__is_warehouse = is_warehouse
+        self.__is_warehouse = self._is_valid_is_warehouse(is_warehouse)
         CompanyDivision._divisions.append(self)
 
     def receipt(self, equipment):
         self._equipment.append(equipment)
 
     def move(self, equipment_id: int, division):
-        division._equipment.append(self._equipment.pop(equipment_id))
+        division.receipt(self._equipment.pop(equipment_id))
 
     def __str__(self):
         table = PrettyTable(['id', 'Наименование', 'Состояние'])
         for i, item in enumerate(self._equipment):
             table.add_row([i, str(item), item.condition])
         return f'{str(table.get_string(title=self._name))}'
+
+    def _is_valid_is_warehouse(self, is_warehouse):
+        if not isinstance(is_warehouse, bool):
+            raise ValueError(f'{self._name}: Тип подразделения может быть только True или False')
+        return is_warehouse
 
     @property
     def name(self):
