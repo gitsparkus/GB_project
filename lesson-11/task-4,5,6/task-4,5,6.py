@@ -11,7 +11,7 @@
 Подсказка: постарайтесь реализовать в проекте «Склад оргтехники» максимум возможностей, изученных на уроках по ООП.
 """
 from classes import CompanyDivision, Xerox, Printer, Scanner
-from func_ui import print_menu, MENU_DICT, print_divisions, select_division, select_equipment_type, bool_input, \
+from ui_func import print_menu, MENU_DICT, print_divisions, select_division, select_equipment_type, bool_input, \
     select_equipment
 
 warehouse = CompanyDivision('Основной склад')
